@@ -139,6 +139,14 @@ app.post('/webhooks/stripe', express.raw({ type: 'application/json' }), async (r
 
 app.use(express.json());
 
+app.get('/', (_req, res) => {
+  res.json({
+    ok: true,
+    service: 'focusroom-api',
+    health: '/health',
+  });
+});
+
 app.get('/health', (_req, res) => {
   res.json({ ok: true });
 });
