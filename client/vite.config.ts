@@ -7,8 +7,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/api': { target: 'http://localhost:4000', changeOrigin: true },
-      '/socket.io': { target: 'http://localhost:4000', ws: true },
+      '/api': { target: 'https://focusroom-g3dj.onrender.com', changeOrigin: true },
+      '/socket.io': { target: 'https://focusroom-g3dj.onrender.com', ws: true },
     },
     allowedHosts: ['localhost', 'ricotta-coil-magnetize.ngrok-free.dev'],
   },
