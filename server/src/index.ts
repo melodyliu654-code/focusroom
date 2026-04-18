@@ -5,7 +5,7 @@ import { createServer } from 'node:http';
 import Stripe from 'stripe';
 import { Server } from 'socket.io';
 import { createClient } from '@supabase/supabase-js';
-import { getUserIdFromAuthHeader, verifySocketToken } from './auth.ts';
+import { getUserIdFromAuthHeader, verifySocketToken } from './auth.js';
 import {
   appendChat,
   createRoom,
@@ -15,7 +15,7 @@ import {
   leaveRoom,
   type AvatarStyle,
   type Room,
-} from './rooms.ts';
+} from './rooms.js';
 
 const PORT = Number(process.env.PORT) || 4000;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { apiFetch } from '../lib/api';
+import { apiFetch, getApiConfigError } from '../lib/api';
 
 export function Dashboard() {
   const { session, isPro } = useAuth();
@@ -13,6 +13,11 @@ export function Dashboard() {
 
   async function createRoom() {
     if (!session?.access_token) return;
+    const configError = getApiConfigError();
+    if (configError) {
+      setErr(configError);
+      return;
+    }
     setErr(null);
     setCreating(true);
     try {
