@@ -17,6 +17,18 @@ FocusRoom has separate frontend (`client/`) and API/socket server (`server/`) ap
 - Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in the server deployment. Protected routes like `POST /api/rooms` return `503` without them.
 - Build the server before starting it. The production start command now expects compiled output in `server/dist/`.
 
+### Render API setup
+
+If you deploy the API to Render from this monorepo, the service should use:
+
+- Root Directory: `server`
+- Build Command: `npm ci && npm run build`
+- Start Command: `npm start`
+
+This repo also includes [render.yaml](/Users/alan/Documents/Codex/2026-04-19-github-plugin-github-openai-curated-could/repo/render.yaml) with those settings for a Blueprint-based setup.
+
+If Render shows `Cannot find module '/opt/render/project/src/server/dist/index.js'`, it usually means the service is starting from the repo root or skipping the server build step. Point the service at `server/` and redeploy.
+
 If the deployed app shows "Could not create room", the fastest checks are:
 
 - frontend `VITE_API_URL` is set correctly
