@@ -1,0 +1,6 @@
+node_modules
+dist
+
+# Local secrets (copy from .env.example)
+.env
+.env.*.local
