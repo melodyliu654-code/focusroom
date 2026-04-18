@@ -5,7 +5,7 @@ import { createServer } from 'node:http';
 import Stripe from 'stripe';
 import { Server } from 'socket.io';
 import { createClient } from '@supabase/supabase-js';
-import { getUserIdFromAuthHeader, verifySocketToken } from './auth.js';
+import { getUserIdFromAuthHeader, verifySocketToken } from './auth';
 import {
   appendChat,
   createRoom,
