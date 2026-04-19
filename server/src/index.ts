@@ -64,11 +64,11 @@ const app = express();
 const httpServer = createServer(app);
 
 /** Allow both localhost and 127.0.0.1 — opening Vite via either should work when using a direct API URL. */
-const BROWSER_ORIGINS = [CLIENT_URL, 'http://localhost:5173', 'http://127.0.0.1:5173'];
+const BROWSER_ORIGINS = ['*'];
 
 app.use(
   cors({
-    origin: BROWSER_ORIGINS,
+    origin: '*',
     credentials: true,
   })
 );
