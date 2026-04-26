@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { isSupabaseConfigured } from '../lib/supabase';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { session, signOut } = useAuth();
+  const { pathname } = useLocation();
+  const hideHeader = pathname === '/' && !session;
 
   return (
     <div className="min-h-dvh flex flex-col">
@@ -14,47 +16,49 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <code className="font-mono text-amber-50/90">client/.env</code>, then restart Vite.
         </div>
       )}
-      <header className="border-b border-white/5 bg-fr-card/40 backdrop-blur-sm">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-          <Link to="/" className="text-fr-text font-medium tracking-tight hover:text-fr-accent transition-colors">
-            FocusRoom
-          </Link>
-          <nav className="flex items-center gap-4 text-sm text-fr-muted">
-            {session ? (
-              <>
-                <Link to="/dashboard" className="hover:text-fr-text transition-colors">
-                  Rooms
-                </Link>
-                <Link to="/billing" className="hover:text-fr-text transition-colors">
-                  Upgrade
-                </Link>
-                <Link to="/settings" className="hover:text-fr-text transition-colors">
-                  Settings
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => void signOut()}
-                  className="text-fr-muted hover:text-fr-text transition-colors"
-                >
-                  Sign out
-                </button>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="hover:text-fr-text transition-colors">
-                  Log in
-                </Link>
-                <Link
-                  to="/signup"
-                  className="rounded-xl bg-fr-accent/20 text-fr-accent px-3 py-1.5 hover:bg-fr-accent/30 transition-colors"
-                >
-                  Sign up
-                </Link>
-              </>
-            )}
-          </nav>
-        </div>
-      </header>
+      {!hideHeader && (
+        <header className="border-b border-white/5 bg-fr-card/40 backdrop-blur-sm">
+          <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <Link to="/" className="text-fr-text font-medium tracking-tight hover:text-fr-accent transition-colors">
+              FocusRoom
+            </Link>
+            <nav className="flex items-center gap-4 text-sm text-fr-muted">
+              {session ? (
+                <>
+                  <Link to="/dashboard" className="hover:text-fr-text transition-colors">
+                    Rooms
+                  </Link>
+                  <Link to="/billing" className="hover:text-fr-text transition-colors">
+                    Upgrade
+                  </Link>
+                  <Link to="/settings" className="hover:text-fr-text transition-colors">
+                    Settings
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => void signOut()}
+                    className="text-fr-muted hover:text-fr-text transition-colors"
+                  >
+                    Sign out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="hover:text-fr-text transition-colors">
+                    Log in
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="rounded-xl bg-fr-accent/20 text-fr-accent px-3 py-1.5 hover:bg-fr-accent/30 transition-colors"
+                  >
+                    Sign up
+                  </Link>
+                </>
+              )}
+            </nav>
+          </div>
+        </header>
+      )}
       <div className="flex-1">{children}</div>
     </div>
   );

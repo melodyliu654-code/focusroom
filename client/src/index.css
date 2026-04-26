@@ -64,3 +64,24 @@
 .fr-anim-wave {
   animation: fr-wave 5s ease-in-out infinite;
 }
+
+.landing-button-hotspot {
+  background: transparent;
+  outline: none;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.landing-button-hotspot:hover {
+  transform: translateY(-1px);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.landing-button-hotspot:focus-visible {
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.18),
+    0 0 0 6px rgba(171, 122, 255, 0.28);
+}
